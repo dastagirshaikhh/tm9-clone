@@ -1,0 +1,18 @@
+<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="grayGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9a9a9a" />
+            <stop offset="100%" stop-color="#3a3a3a" />
+        </linearGradient>
+    </defs>
+
+    <path
+        d="M0,60
+         C30,45 60,75 90,60
+         C120,45 150,75 180,60
+         C210,45 240,75 270,60
+         L300,100 L0,100 Z"
+        fill="url(#grayGrad)"
+    />
+</svg>
+  
