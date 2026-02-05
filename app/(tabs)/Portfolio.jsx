@@ -1,3 +1,5 @@
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React from "react";
 import {
   ScrollView,
@@ -9,21 +11,38 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Wave from "../../components/wave.jsx";
 
-const PortfolioCard = ({ small, big, Wave, arrowColor, icon }) => {
+/* ---------- CARD ---------- */
+const PortfolioCard = ({
+  small,
+  big,
+  Wave,
+  arrowColor,
+  iconName,
+  iconLib = "Ionicons",
+}) => {
+  const Icon =
+    iconLib === "MaterialCommunityIcons" ? MaterialCommunityIcons : Ionicons;
+
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <View style={styles.iconCircle}>{icon}</View>
+        <View style={styles.iconCircle}>
+          <Icon name={iconName} size={20} color="#0b1620" />
+        </View>
+
         <View>
           <Text style={styles.cardSmall}>{small}</Text>
           <Text style={styles.cardBig}>{big}</Text>
         </View>
       </View>
 
-      {/* SVG WAVE */}
+      {/* WAVE */}
       <Wave />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push("/copy-trading")}
+      >
         <Text style={styles.buttonText}>CLICK HERE</Text>
         <Text style={[styles.buttonArrow, { color: arrowColor }]}>›</Text>
       </TouchableOpacity>
@@ -31,16 +50,14 @@ const PortfolioCard = ({ small, big, Wave, arrowColor, icon }) => {
   );
 };
 
+/* ---------- SCREEN ---------- */
 export default function Portfolio() {
   return (
-    <SafeAreaView
-      edges={["top"]}
-      style={{ flex: 1, backgroundColor: "#0b1620" }}
-    >
+    <SafeAreaView edges={["top"]} style={styles.safe}>
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.menu}>☰</Text>
+          <Ionicons name="menu" size={22} color="#fff" />
           <Text style={styles.headerTitle}>Portfolio</Text>
         </View>
 
@@ -49,42 +66,49 @@ export default function Portfolio() {
           <PortfolioCard
             small="COPY"
             big="TRADING"
-            waveColor="#0a4fa3"
+            iconName="copy-outline"
             arrowColor="#2aa3ff"
             Wave={() => <Wave stopColor="#0b4d2a" />}
           />
+
           <PortfolioCard
             small="TOP"
             big="TRADERS"
-            waveColor="#4a4a4a"
+            iconName="account-group-outline"
+            iconLib="MaterialCommunityIcons"
             arrowColor="#999"
             Wave={() => <Wave stopColor="#0b4d2a" />}
           />
+
           <PortfolioCard
             small="TOP GAINED"
             big="PAIRS"
-            waveColor="#0b6b3a"
+            iconName="trending-up-outline"
             arrowColor="#2ecc71"
             Wave={() => <Wave stopColor="#0b4d2a" />}
           />
+
           <PortfolioCard
             small="ACCOUNT GROWTH"
             big="REPORT"
-            waveColor="#7a1e16"
+            iconName="bar-chart-outline"
             arrowColor="#ff4d4d"
             Wave={() => <Wave stopColor="#0b4d2a" />}
           />
+
           <PortfolioCard
             small="PRICE"
             big="ALERT"
-            waveColor="#0a4fa3"
+            iconName="notifications-outline"
             arrowColor="#2aa3ff"
             Wave={() => <Wave stopColor="#0b4d2a" />}
           />
+
           <PortfolioCard
             small="FOREX"
             big="ANALYSIS"
-            waveColor="#4a4a4a"
+            iconName="chart-line"
+            iconLib="MaterialCommunityIcons"
             arrowColor="#999"
             Wave={() => <Wave stopColor="#0b4d2a" />}
           />
@@ -94,10 +118,15 @@ export default function Portfolio() {
   );
 }
 
+/* ---------- STYLES ---------- */
 const styles = StyleSheet.create({
-  container: {
+  safe: {
     flex: 1,
     backgroundColor: "#0b1620",
+  },
+
+  container: {
+    flex: 1,
   },
 
   header: {
@@ -107,16 +136,11 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
 
-  menu: {
-    color: "#fff",
-    fontSize: 22,
-    marginRight: 12,
-  },
-
   headerTitle: {
     color: "#fff",
     fontSize: 20,
     fontWeight: "600",
+    marginLeft: 12,
   },
 
   grid: {
@@ -133,9 +157,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 14,
     marginBottom: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.6,
-    shadowRadius: 10,
     elevation: 8,
   },
 
@@ -149,6 +170,8 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: 18,
     backgroundColor: "#eaeaea",
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: 10,
   },
 
@@ -163,13 +186,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     marginTop: -2,
-  },
-
-  wave: {
-    height: 72,
-    borderRadius: 10,
-    marginVertical: 16,
-    opacity: 0.9,
   },
 
   button: {

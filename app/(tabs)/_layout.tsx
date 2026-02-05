@@ -11,10 +11,6 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        sceneContainerStyle: {
-          paddingTop: 24,
-          backgroundColor: "#0b1620",
-        },
       }}
     >
       <Tabs.Screen
