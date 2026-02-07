@@ -41,7 +41,45 @@ const PortfolioCard = ({
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push("/copy-trading")}
+        onPress={() => {
+          switch (big) {
+            case "TRADING":
+              if (small === "COPY") {
+                router.push("/copy-trading");
+              } else {
+                router.push("/ai-trading");
+              }
+
+              break;
+            case "TRADERS":
+              router.push("/top-traders");
+              break;
+            case "REPORT":
+              router.push("/trading-stats");
+              break;
+            case "PAIRS":
+              router.push("/top-pairs");
+              break;
+            case "ALERT":
+              router.push("/price-alert");
+              break;
+            case "ANALYSIS":
+              router.push("/forex-analysis");
+              break;
+            case "NEWS":
+              router.push("/news");
+              break;
+            case "CALENDAR":
+              router.push("/economic-calender");
+              break;
+            case "AUTO":
+              router.push("/automation");
+              break;
+            case "STRATEGY":
+              router.push("/add-strategy");
+              break;
+          }
+        }}
       >
         <Text style={styles.buttonText}>CLICK HERE</Text>
         <Text style={[styles.buttonArrow, { color: arrowColor }]}>›</Text>
@@ -111,6 +149,53 @@ export default function Portfolio() {
             iconLib="MaterialCommunityIcons"
             arrowColor="#999"
             Wave={() => <Wave stopColor="#0b4d2a" />}
+          />
+          {/* NEWS */}
+          <PortfolioCard
+            small=""
+            big="NEWS"
+            iconName="megaphone-outline"
+            arrowColor="#22c55e"
+            Wave={() => <Wave stopColor="#16a34a" />}
+          />
+
+          {/* ECONOMIC CALENDAR */}
+          <PortfolioCard
+            small="ECONOMIC"
+            big="CALENDAR"
+            iconName="calendar-outline"
+            arrowColor="#ef4444"
+            Wave={() => <Wave stopColor="#dc2626" />}
+          />
+
+          {/* AI TRADING */}
+          <PortfolioCard
+            small="AI"
+            big="TRADING"
+            iconName="robot-outline"
+            iconLib="MaterialCommunityIcons"
+            arrowColor="#3b82f6"
+            Wave={() => <Wave stopColor="#2563eb" />}
+          />
+
+          {/* TP / SL AUTO */}
+          <PortfolioCard
+            small="TP / SL"
+            big="AUTO"
+            iconName="monitor-dashboard"
+            iconLib="MaterialCommunityIcons"
+            arrowColor="#9ca3af"
+            Wave={() => <Wave stopColor="#6b7280" />}
+          />
+
+          {/* ADD STRATEGY (FULL WIDTH) */}
+          <PortfolioCard
+            small="ADD"
+            big="STRATEGY"
+            iconName="chart-multiple"
+            iconLib="MaterialCommunityIcons"
+            arrowColor="#3b82f6"
+            Wave={() => <Wave stopColor="#2563eb" />}
           />
         </ScrollView>
       </View>

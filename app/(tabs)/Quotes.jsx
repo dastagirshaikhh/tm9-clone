@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import DrawerLayout from "../../components/ui/DrawerLayout.jsx";
 
 const Price = ({ value, large, sup }) => (
   <View style={styles.priceWrap}>
@@ -25,48 +27,56 @@ const QuoteItem = ({
   low,
   high,
   volume,
+  setOpenDrawer,
 }) => {
   return (
-    <View style={styles.row}>
-      {/* LEFT CONTENT */}
-      <View style={styles.left}>
-        <Text style={styles.change}>
-          {change} {percent}
-        </Text>
+    <Pressable
+      onPress={() => {
+        setOpenDrawer(true);
+      }}
+    >
+      <View style={styles.row}>
+        {/* LEFT CONTENT */}
+        <View style={styles.left}>
+          <Text style={styles.change}>
+            {change} {percent}
+          </Text>
 
-        <View style={styles.symbolRow}>
-          <Text style={styles.symbol}>{symbol}</Text>
-          <Text style={styles.star}>☆</Text>
-        </View>
-
-        <Text style={styles.time}>04:54:36 ┤ {volume}</Text>
-
-        <TouchableOpacity style={styles.analyseBtn}>
-          <Text style={styles.analyseText}>Analyse</Text>
-          <View style={styles.analyseArrowBox}>
-            <Text style={styles.analyseArrow}>›</Text>
+          <View style={styles.symbolRow}>
+            <Text style={styles.symbol}>{symbol}</Text>
+            <Text style={styles.star}>☆</Text>
           </View>
-        </TouchableOpacity>
-      </View>
 
-      {/* RIGHT OVERLAY */}
-      <View style={styles.right}>
-        <View style={styles.priceRow}>
-          <Price value={bid.value} large={bid.large} sup={bid.sup} />
-          <Price value={ask.value} large={ask.large} sup={ask.sup} />
+          <Text style={styles.time}>04:54:36 ┤ {volume}</Text>
+
+          <TouchableOpacity style={styles.analyseBtn}>
+            <Text style={styles.analyseText}>Analyse</Text>
+            <View style={styles.analyseArrowBox}>
+              <Text style={styles.analyseArrow}>›</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
-        <Text style={styles.range}>
-          L: {low} H: {high}
-        </Text>
+        {/* RIGHT OVERLAY */}
+        <View style={styles.right}>
+          <View style={styles.priceRow}>
+            <Price value={bid.value} large={bid.large} sup={bid.sup} />
+            <Price value={ask.value} large={ask.large} sup={ask.sup} />
+          </View>
 
-        <Text style={styles.neutral}>— NEUTRAL</Text>
+          <Text style={styles.range}>
+            L: {low} H: {high}
+          </Text>
+
+          <Text style={styles.neutral}>— NEUTRAL</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
 export default function Quotes() {
+  const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <SafeAreaView
       edges={["top"]}
@@ -93,6 +103,7 @@ export default function Quotes() {
             ask={{ value: "0.69", large: "21", sup: "7" }}
             low="0.69217"
             high="0.69616"
+            setOpenDrawer={setOpenDrawer}
           />
 
           <QuoteItem
@@ -104,9 +115,16 @@ export default function Quotes() {
             ask={{ value: "76.72", large: "53", sup: "9" }}
             low="75627.38"
             high="79362.55"
+            setOpenDrawer={setOpenDrawer}
           />
         </ScrollView>
       </View>
+      <DrawerLayout
+        isOpen={openDrawer}
+        onClose={() => {
+          setOpenDrawer(false);
+        }}
+      />
     </SafeAreaView>
   );
 }
