@@ -39,8 +39,64 @@ export default function TradeScreen() {
           <InfoRow label="Equity:" value="10000.00" />
           <InfoRow label="Free margin:" value="10000.00" />
         </View>
+        {/* Positions Section */}
+        <View style={styles.positionsSection}>
+          {/* Header */}
+          <View style={styles.positionsHeader}>
+            <Text style={styles.positionsTitle}>Positions (2)</Text>
+
+            <View style={styles.positionsIcons}>
+              <MaterialIcons name="close-fullscreen" size={18} color="#fff" />
+              <Ionicons name="ellipsis-horizontal" size={20} color="#fff" />
+            </View>
+          </View>
+
+          {/* Position Row 1 */}
+          <PositionRow
+            symbol="BTCUSD"
+            type="sell"
+            volume="5.00"
+            from="8675.28"
+            to="8665.11"
+            profit="50.85"
+          />
+
+          {/* Divider */}
+          <View style={styles.divider} />
+
+          {/* Position Row 2 */}
+          <PositionRow
+            symbol="BTCUSD"
+            type="sell"
+            volume="5.00"
+            from="8720.33"
+            to="8665.11"
+            profit="276.10"
+          />
+        </View>
       </SafeAreaView>
     </LinearGradient>
+  );
+}
+
+function PositionRow({ symbol, type, volume, from, to, profit }) {
+  return (
+    <View style={styles.positionRow}>
+      <View>
+        <Text style={styles.positionTitle}>
+          {symbol},{" "}
+          <Text style={styles.sellText}>
+            {type} {volume}
+          </Text>
+        </Text>
+
+        <Text style={styles.positionSub}>
+          {from} → {to}
+        </Text>
+      </View>
+
+      <Text style={styles.profitText}>{profit}</Text>
+    </View>
   );
 }
 
@@ -129,5 +185,65 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: 90,
     textAlign: "right",
+  },
+  /* Positions Section */
+  positionsSection: {
+    marginTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: "#1f2937",
+  },
+
+  positionsHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+
+  positionsTitle: {
+    color: "#9ca3af",
+    fontSize: 14,
+  },
+
+  positionsIcons: {
+    flexDirection: "row",
+    gap: 16,
+  },
+
+  positionRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+
+  positionTitle: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+
+  sellText: {
+    color: "#ef4444",
+    fontWeight: "600",
+  },
+
+  positionSub: {
+    color: "#9ca3af",
+    fontSize: 13,
+    marginTop: 2,
+  },
+
+  profitText: {
+    color: "#38bdf8",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+  divider: {
+    height: 1,
+    backgroundColor: "#1f2937",
+    marginHorizontal: 16,
   },
 });

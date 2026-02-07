@@ -1,9 +1,9 @@
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CandleSticks from "../../components/CandleSticks.jsx";
+import TradingView from "../../components/TradingView.jsx";
 
 export default function ChartScreen() {
   return (
@@ -16,84 +16,15 @@ export default function ChartScreen() {
         <View style={styles.topBar}>
           <Ionicons name="menu" size={24} color="#fff" />
           <TouchableOpacity style={styles.symbol}>
-            <Text style={styles.symbolText}>XAUUSD</Text>
+            <Text style={styles.symbolText}>BTCUSD</Text>
             <Ionicons name="chevron-down" size={18} color="#fff" />
           </TouchableOpacity>
           <Ionicons name="refresh" size={22} color="#fff" />
           <View style={styles.accountIcon} />
         </View>
 
-        {/* SECOND TOOL BAR */}
-        <View style={styles.toolbar}>
-          <Ionicons name="add-circle-outline" size={22} color="#fff" />
-          <Text style={styles.timeframe}>15m</Text>
-          <MaterialIcons name="candlestick-chart" size={22} color="#fff" />
-          <Text style={styles.fx}>ƒx</Text>
-          <Ionicons name="grid-outline" size={22} color="#fff" />
-
-          <TouchableOpacity style={styles.bulkBtn}>
-            <Text style={styles.bulkText}>Bulk Closing</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.mainArea}>
-          {/* LEFT TOOLBAR */}
-          <View style={styles.leftTools}>
-            {[
-              "add",
-              "trending-up",
-              "options",
-              "share-2",
-              "git-branch",
-              "create",
-              "text",
-              "happy-outline",
-              "crop",
-              "search",
-              "headset",
-              "lock-closed",
-              "eye",
-            ].map((icon, i) => (
-              <Ionicons
-                key={i}
-                name={icon as any}
-                size={22}
-                color="#cbd5e1"
-                style={styles.toolIcon}
-              />
-            ))}
-          </View>
-
-          {/* CHART AREA */}
-          <View style={styles.chartArea}>
-            <Text style={styles.chartTitle}>XAUUSD · 15 · TM9</Text>
-            <Text style={styles.chartPrice}>4861.62 0.00 (0.00%)</Text>
-
-            {/* MOCK CANDLE CHART */}
-            <View style={styles.chartMock}>
-              <CandleSticks />
-            </View>
-
-            {/* PRICE LABELS */}
-            <View style={styles.pricePanel}>
-              <PriceBox label="Ask" price="4861.85" color="#ef4444" />
-              <PriceBox label="Bid" price="4861.77" color="#3b82f6" />
-              <PriceBox label="" price="4861.62\n00:31" color="#10b981" />
-            </View>
-
-            {/* HIGH / LOW */}
-            <View style={styles.highLow}>
-              <Text style={styles.hl}>High 5023.85</Text>
-              <Text style={styles.hl}>Low 4788.83</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* BOTTOM BAR */}
-        <View style={styles.bottomBar}>
-          <Text style={styles.bottomText}>Date Range</Text>
-          <Text style={styles.bottomText}>03:29:27 (UTC)</Text>
-          <Text style={[styles.bottomText, { color: "#3b82f6" }]}>auto</Text>
+        <View style={{ flex: 1 }}>
+          <TradingView />
         </View>
       </SafeAreaView>
     </LinearGradient>

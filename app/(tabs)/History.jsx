@@ -59,21 +59,72 @@ export default function HistoryScreen() {
         </View>
 
         {/* Summary Rows */}
-        <View style={styles.section}>
-          <InfoRow label="Profit:" value="0.00" highlight />
-          <InfoRow label="Swap:" value="0.00" />
-          <InfoRow label="Commission:" value="0.00" />
-          <InfoRow label="Balance:" value="0.00" />
-          <InfoRow label="Total Lots:" value="0.00" />
-        </View>
+        {activeTab == "ORDERS" ? (
+          <>
+            <View style={styles.dateRow}>
+              <Text style={styles.dateText}>05-02-2026</Text>
+              <Feather name="eye" size={22} color="#fff" />
+            </View>
+            {/* Order Summary */}
+            <View style={styles.orderSummary}>
+              <SummaryRow label="Filled:" value="3" />
+              <SummaryRow label="Cancelled:" value="0" />
+              <SummaryRow label="Total:" value="3" />
+            </View>
 
-        {/* Date Row */}
-        <View style={styles.dateRow}>
-          <Text style={styles.dateText}>05-02-2026</Text>
-          <Feather name="eye" size={22} color="#fff" />
-        </View>
+            {/* History List */}
+            <View style={styles.historyList}>
+              <HistoryItem time="2026.02.07 08:31:39" />
+              <HistoryItem time="2026.02.07 08:31:33" />
+              <HistoryItem time="2026.02.07 08:31:11" />
+            </View>
+          </>
+        ) : (
+          <View style={styles.section}>
+            <InfoRow label="Profit:" value="0.00" highlight />
+            <InfoRow label="Swap:" value="0.00" />
+            <InfoRow label="Commission:" value="0.00" />
+            <InfoRow label="Balance:" value="0.00" />
+            <InfoRow label="Total Lots:" value="0.00" />
+          </View>
+        )}
       </SafeAreaView>
     </LinearGradient>
+  );
+}
+
+function SummaryRow({ label, value }) {
+  return (
+    <View style={styles.summaryRow}>
+      <Text style={styles.summaryLabel}>{label}</Text>
+
+      <View style={styles.dots}>
+        {Array.from({ length: 22 }).map((_, i) => (
+          <View key={i} style={styles.dot} />
+        ))}
+      </View>
+
+      <Text style={styles.summaryValue}>{value}</Text>
+    </View>
+  );
+}
+
+function HistoryItem({ time }) {
+  return (
+    <View style={styles.historyItem}>
+      <View>
+        <Text style={styles.symbolText}>
+          BTCUSD,<Text style={styles.marketText}> market</Text>
+        </Text>
+
+        <Text style={styles.volumeText}>5.00 / 5.00 at market</Text>
+      </View>
+
+      <View style={styles.rightBlock}>
+        <Text style={styles.timeText}>{time}</Text>
+        <Text style={styles.filledText}>FILLED</Text>
+      </View>
+    </View>
   );
 }
 
@@ -96,6 +147,80 @@ function InfoRow({ label, value, highlight = false }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  /* Summary */
+  orderSummary: {
+    marginTop: 10,
+    paddingHorizontal: 16,
+  },
+
+  summaryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 6,
+  },
+
+  summaryLabel: {
+    color: "#ffffff",
+    fontSize: 15,
+    width: 100,
+  },
+
+  summaryValue: {
+    color: "#ffffff",
+    fontSize: 15,
+    width: 40,
+    textAlign: "right",
+  },
+
+  /* History */
+  historyList: {
+    marginTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "#1f2937",
+  },
+
+  historyItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "#1f2937",
+  },
+
+  symbolText: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+
+  marketText: {
+    color: "#ef4444",
+    fontWeight: "600",
+  },
+
+  volumeText: {
+    color: "#9ca3af",
+    fontSize: 13,
+    marginTop: 4,
+  },
+
+  rightBlock: {
+    alignItems: "flex-end",
+  },
+
+  timeText: {
+    color: "#9ca3af",
+    fontSize: 12,
+  },
+
+  filledText: {
+    color: "#9ca3af",
+    fontSize: 13,
+    marginTop: 4,
+    fontWeight: "600",
   },
 
   /* Top Bar */
