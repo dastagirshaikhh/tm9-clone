@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import { router, Stack } from "expo-router";
-import React, { useState } from "react";
+import { Stack } from "expo-router";
+import { useState } from "react";
 import {
   StyleSheet,
   Switch,
@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Hamberger from "../components/Hamberger";
 
 export default function CreatePriceAlertScreen() {
   const [isBid, setIsBid] = useState(true);
@@ -22,17 +23,7 @@ export default function CreatePriceAlertScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           {/* HEADER */}
-          <View style={styles.header}>
-            <Ionicons
-              name="arrow-back"
-              size={22}
-              color="#fff"
-              onPress={() => {
-                router.back();
-              }}
-            />
-            <Text style={styles.headerTitle}>Create Price Alert</Text>
-          </View>
+          <Hamberger title="Create Price Alert"/>
 
           {/* SELECT SYMBOL */}
           <View style={styles.section}>

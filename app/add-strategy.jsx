@@ -1,6 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
-import { router, Stack } from "expo-router";
-import React from "react";
+import { Stack } from "expo-router";
 import {
   ScrollView,
   StyleSheet,
@@ -10,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Hamberger from "../components/Hamberger";
 
 export default function AddStrategyScreen() {
   return (
@@ -18,17 +17,7 @@ export default function AddStrategyScreen() {
       <SafeAreaView style={styles.safe}>
         <ScrollView contentContainerStyle={styles.container}>
           {/* HEADER */}
-          <View style={styles.header}>
-            <Ionicons
-              name="arrow-back"
-              size={22}
-              color="#fff"
-              onPress={() => {
-                router.back();
-              }}
-            />
-            <Text style={styles.headerTitle}>Add Strategy</Text>
-          </View>
+          <Hamberger title="Add Strategy"/>
 
           {/* MAIN CARD */}
           <View style={styles.card}>

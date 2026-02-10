@@ -1,6 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
-import React from "react";
 import {
   ScrollView,
   StyleSheet,

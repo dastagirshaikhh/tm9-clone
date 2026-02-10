@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DrawerLayout from "../../components/ui/DrawerLayout.jsx";
+import { DrawerContext } from "../_layout.jsx";
 
 const Price = ({ value, large, sup }) => (
   <View style={styles.priceWrap}>
@@ -77,6 +78,7 @@ const QuoteItem = ({
 
 export default function Quotes() {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { showdrawer } = useContext(DrawerContext);
   return (
     <SafeAreaView
       edges={["top"]}
@@ -85,7 +87,14 @@ export default function Quotes() {
       <View style={styles.container}>
         {/* HEADER */}
         <View style={styles.header}>
-          <Text style={styles.headerIcon}>☰</Text>
+          <Text
+            style={styles.headerIcon}
+            onPress={() => {
+              showdrawer(true);
+            }}
+          >
+            ☰
+          </Text>
           <Text style={styles.headerTitle}>Quotes</Text>
           <View style={styles.headerIcons}>
             <Text style={styles.headerIcon}>＋</Text>

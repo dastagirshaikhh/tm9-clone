@@ -28,7 +28,12 @@ export default function CopyTradingScreen() {
           />
           <Text style={styles.headerTitle}>Copy Trading</Text>
 
-          <TouchableOpacity style={styles.masterBtn}>
+          <TouchableOpacity
+            style={styles.masterBtn}
+            onPress={() => {
+              router.push("/CreateMasterTrader");
+            }}
+          >
             <Text style={styles.masterText}>Be a Master Trader</Text>
             <Ionicons name="trending-up" size={16} color="#2563eb" />
           </TouchableOpacity>
@@ -68,36 +73,48 @@ export default function CopyTradingScreen() {
 
 function CurrencyCard({ label, flag }) {
   return (
-    <View style={styles.currencyCard}>
-      <Image source={{ uri: flag }} style={styles.flag} />
-      <Text style={styles.currencyText}>{label}</Text>
-    </View>
+    <TouchableOpacity
+      onPress={() => {
+        router.push("/CopyTradingCurrency/3");
+      }}
+    >
+      <View style={styles.currencyCard}>
+        <Image source={{ uri: flag }} style={styles.flag} />
+        <Text style={styles.currencyText}>{label}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 function TraderCard({ name, investors }) {
   return (
-    <View style={styles.traderCard}>
-      <View style={styles.traderTop}>
-        <View style={styles.logo}>
-          <Text style={styles.logoText}>TM9</Text>
-        </View>
-
-        <View style={{ flex: 1 }}>
-          <Text style={styles.traderName}>{name}</Text>
-
-          <View style={styles.statsRow}>
-            <Stat icon="swap-horizontal" value="0.00%" />
-            <Stat icon="hand-coin-outline" value="20%" />
-            <Text style={styles.statText}>Risk 0</Text>
+    <TouchableOpacity
+      onPress={() => {
+        router.push("/StrategyDetailsScreen/2");
+      }}
+    >
+      <View style={styles.traderCard}>
+        <View style={styles.traderTop}>
+          <View style={styles.logo}>
+            <Text style={styles.logoText}>TM9</Text>
           </View>
+
+          <View style={{ flex: 1 }}>
+            <Text style={styles.traderName}>{name}</Text>
+
+            <View style={styles.statsRow}>
+              <Stat icon="swap-horizontal" value="0.00%" />
+              <Stat icon="hand-coin-outline" value="20%" />
+              <Text style={styles.statText}>Risk 0</Text>
+            </View>
+          </View>
+
+          <Text style={styles.investors}>{investors}</Text>
         </View>
 
-        <Text style={styles.investors}>{investors}</Text>
+        <Text style={styles.investorLabel}>Investors</Text>
       </View>
-
-      <Text style={styles.investorLabel}>Investors</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

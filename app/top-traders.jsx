@@ -1,6 +1,6 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { router, Stack } from "expo-router";
-import React, { useState } from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Stack } from "expo-router";
+import { useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Hamberger from "../components/Hamberger";
 
 export default function TopTradersScreen() {
   const [active, setActive] = useState("Today");
@@ -19,17 +20,7 @@ export default function TopTradersScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           {/* HEADER */}
-          <View style={styles.header}>
-            <Ionicons
-              name="arrow-back"
-              size={22}
-              color="#fff"
-              onPress={() => {
-                router.back();
-              }}
-            />
-            <Text style={styles.headerTitle}>Top Traders</Text>
-          </View>
+          <Hamberger title="Top Traders"/>
 
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* SEGMENTED CONTROL */}

@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Hamberger from "../../components/Hamberger.jsx";
 import Wave from "../../components/wave.jsx";
 
 /* ---------- CARD ---------- */
@@ -94,10 +95,7 @@ export default function Portfolio() {
     <SafeAreaView edges={["top"]} style={styles.safe}>
       <View style={styles.container}>
         {/* Header */}
-        <View style={styles.header}>
-          <Ionicons name="menu" size={22} color="#fff" />
-          <Text style={styles.headerTitle}>Portfolio</Text>
-        </View>
+        <Hamberger title="Portfolio"/>
 
         {/* Grid */}
         <ScrollView contentContainerStyle={styles.grid}>

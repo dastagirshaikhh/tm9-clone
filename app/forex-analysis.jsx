@@ -1,8 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
-import { router, Stack } from "expo-router";
-import React from "react";
+import { Stack } from "expo-router";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Hamberger from "../components/Hamberger";
 
 /* ---- MOCK DATA ---- */
 const DATA = [
@@ -52,17 +51,7 @@ export default function ForexAnalysisScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           {/* HEADER */}
-          <View style={styles.header}>
-            <Ionicons
-              name="arrow-back"
-              size={22}
-              color="#fff"
-              onPress={() => {
-                router.back();
-              }}
-            />
-            <Text style={styles.headerTitle}>Forex Analysis</Text>
-          </View>
+          <Hamberger title="Forex Analysis"/>
 
           {/* FILTER BAR */}
           <View style={styles.filterBar}>
@@ -147,19 +136,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#070d14",
-  },
-
-  /* Header */
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 14,
-  },
-  headerTitle: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "600",
-    marginLeft: 12,
   },
 
   /* Filters */
