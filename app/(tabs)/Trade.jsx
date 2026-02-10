@@ -1,12 +1,10 @@
 import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TradeScreen() {
-  const navigation = useNavigation();
   return (
     <LinearGradient
       colors={["#0b1621", "#0a121b", "#070d14"]}
