@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React, { useContext, useState } from "react";
 import {
   Pressable,
@@ -97,8 +98,22 @@ export default function Quotes() {
           </Text>
           <Text style={styles.headerTitle}>Quotes</Text>
           <View style={styles.headerIcons}>
-            <Text style={styles.headerIcon}>＋</Text>
-            <Text style={styles.headerIcon}>✎</Text>
+            <Text
+              style={styles.headerIcon}
+              onPress={() => {
+                router.push("/AddSymbols");
+              }}
+            >
+              ＋
+            </Text>
+            <Text
+              style={styles.headerIcon}
+              onPress={() => {
+                router.push("/SelectedSymbols");
+              }}
+            >
+              ✎
+            </Text>
           </View>
         </View>
 

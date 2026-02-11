@@ -16,6 +16,7 @@
     "app/(tabs)/Trade.jsx",
     "app/(tabs)/History.jsx",
     "app/modal.jsx",
-    "app/_layout.jsx"
+    "app/_layout.jsx",
+    "app/(tabs)/Charts.jsx"
   ]
 }

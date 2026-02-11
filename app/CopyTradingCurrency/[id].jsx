@@ -1,7 +1,7 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Stack, useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -14,12 +14,14 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import CopyTradingFilterModal from "../../components/CopyTradingFilterModal";
+import { DrawerContext } from "../_layout";
 
 export default function CopyTradingScreen() {
   const { id } = useLocalSearchParams();
   const insets = useSafeAreaInsets();
   const [activeRange, setActiveRange] = useState("Total");
   const [filter, setFilter] = useState(false);
+  const { showdrawer } = useContext(DrawerContext);
 
   return (
     <>
@@ -31,7 +33,14 @@ export default function CopyTradingScreen() {
         <SafeAreaView edges={["top"]} style={styles.safe}>
           {/* Header */}
           <View style={styles.header}>
-            <Ionicons name="menu" size={26} color="#fff" />
+            <Ionicons
+              name="menu"
+              size={26}
+              color="#fff"
+              onPress={() => {
+                showdrawer(true);
+              }}
+            />
             <Text style={styles.headerTitle}>Copy Trading</Text>
           </View>
 

@@ -2,7 +2,7 @@ import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 
 export default function SideDrawer({ visible, onClose }) {
@@ -44,21 +44,63 @@ export default function SideDrawer({ visible, onClose }) {
         <View style={styles.divider} />
 
         {/* MENU ITEMS */}
-        <DrawerItem icon="sliders" label="Trade" lib="Feather" />
-        <DrawerItem icon="file-text" label="News" lib="Feather" />
-        <DrawerItem icon="mail" label="Mailbox" lib="Feather" badge="0" />
-        <DrawerItem icon="book" label="Journal" lib="Feather" />
-        <DrawerItem icon="settings" label="Settings" lib="Ionicons" />
+        <DrawerItem
+          icon="sliders"
+          label="Trade"
+          lib="Feather"
+          onClose={onClose}
+        />
+        <DrawerItem
+          icon="file-text"
+          label="News"
+          lib="Feather"
+          onClose={onClose}
+        />
+        {/*<DrawerItem
+          icon="mail"
+          label="Mailbox"
+          lib="Feather"
+          badge="0"
+          onClose={onClose}
+        />
+        <DrawerItem
+          icon="book"
+          label="Journal"
+          lib="Feather"
+          onClose={onClose}
+        />*/}
+        <DrawerItem
+          icon="settings"
+          label="Settings"
+          lib="Ionicons"
+          onClose={onClose}
+        />
         <DrawerItem
           icon="notifications"
           label="Latest Updates"
           lib="Ionicons"
+          onClose={onClose}
         />
-        <DrawerItem icon="alert-circle" label="Report an issue" lib="Feather" />
-        <DrawerItem icon="person-add" label="Add Account" lib="Ionicons" />
-        <DrawerItem icon="person-add-outline" label="Register" lib="Ionicons" />
+        {/* <DrawerItem
+          icon="alert-circle"
+          label="Report an issue"
+          lib="Feather"
+          onClose={onClose}
+        />*/}
+        <DrawerItem
+          icon="person-add"
+          label="Add Account"
+          lib="Ionicons"
+          onClose={onClose}
+        />
+        <DrawerItem
+          icon="person-add-outline"
+          label="Register"
+          lib="Ionicons"
+          onClose={onClose}
+        />
 
-        {/* SAFE TRADER */}
+        {/* SAFE TRADER 
         <View style={styles.switchRow}>
           <View style={styles.rowLeft}>
             <Ionicons name="shield-checkmark" size={22} color="#fff" />
@@ -71,7 +113,7 @@ export default function SideDrawer({ visible, onClose }) {
             thumbColor="#fff"
             trackColor={{ true: "#2563eb", false: "#374151" }}
           />
-        </View>
+        </View>*/}
 
         {/* VERSION */}
         <Text style={styles.version}>v1.7.10</Text>
@@ -82,12 +124,45 @@ export default function SideDrawer({ visible, onClose }) {
 
 /* -------------------- ITEM -------------------- */
 
-function DrawerItem({ icon, label, badge, lib }) {
+function DrawerItem({ icon, label, badge, lib, onClose }) {
   const Icon =
     lib === "Ionicons" ? Ionicons : lib === "Feather" ? Feather : FontAwesome5;
 
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        switch (label) {
+          case "Add Account":
+            router.push("/Broker");
+            onClose();
+            break;
+          case "Settings":
+            router.push("/Settings");
+            onClose();
+            break;
+          case "News":
+            router.push("/news");
+            onClose();
+            break;
+          case "Trade":
+            router.push("/Trade");
+            onClose();
+            break;
+          case "Latest Updates":
+            router.push("/Notifications");
+            onClose();
+            break;
+          case "Register":
+            router.push("/OpenAccount");
+            onClose();
+            break;
+          default:
+            onClose();
+            break;
+        }
+      }}
+    >
       <View style={styles.rowLeft}>
         <Icon name={icon} size={22} color="#fff" />
         <Text style={styles.label}>{label}</Text>
@@ -110,7 +185,7 @@ const styles = StyleSheet.create({
   drawer: {
     width: "78%",
     height: "100%",
-    paddingTop: 60,
+    paddingTop: 15,
     paddingHorizontal: 18,
   },
 

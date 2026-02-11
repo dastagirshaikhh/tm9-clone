@@ -1,10 +1,13 @@
 import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { useContext } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DrawerContext } from "../_layout";
 
 export default function TradeScreen() {
+  const { showdrawer } = useContext(DrawerContext);
   return (
     <LinearGradient
       colors={["#0b1621", "#0a121b", "#070d14"]}
@@ -16,18 +19,44 @@ export default function TradeScreen() {
       >
         {/* Top Bar */}
         <View style={styles.topBar}>
-          <Ionicons name="menu" size={24} color="#fff" />
+          <Ionicons
+            name="menu"
+            size={24}
+            color="#fff"
+            onPress={() => {
+              showdrawer(true);
+            }}
+          />
 
           <Text style={styles.title}>Trade</Text>
 
           <View style={styles.topIcons}>
             <Ionicons name="refresh" size={22} color="#fff" />
-            <View style={styles.aiBadge}>
-              <Text style={styles.aiText}>AI</Text>
-            </View>
-            <FontAwesome5 name="robot" size={18} color="#fff" />
+            <TouchableOpacity
+              onPress={() => {
+                router.push("/ai-trading");
+              }}
+            >
+              <View style={styles.aiBadge}>
+                <Text style={styles.aiText}>AI</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                router.push("/BotTrading");
+              }}
+            >
+              <FontAwesome5 name="robot" size={18} color="#fff" />
+            </TouchableOpacity>
             <MaterialIcons name="swap-vert" size={22} color="#fff" />
-            <Ionicons name="add" size={24} color="#fff" />
+            <Ionicons
+              name="add"
+              size={24}
+              color="#fff"
+              onPress={() => {
+                router.push("/market-execution");
+              }}
+            />
           </View>
         </View>
 

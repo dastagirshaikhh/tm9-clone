@@ -1,11 +1,19 @@
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useContext, useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DrawerContext } from "../_layout";
 
 export default function HistoryScreen() {
   const [activeTab, setActiveTab] = useState("POSITIONS");
+  const { showdrawer } = useContext(DrawerContext);
 
   const tabs = [
     { label: "POSITIONS", count: 0 },
@@ -25,7 +33,15 @@ export default function HistoryScreen() {
       >
         {/* Top Bar */}
         <View style={styles.topBar}>
-          <Ionicons name="menu" size={24} color="#fff" />
+          <Ionicons
+            name="menu"
+            size={24}
+            color="#fff"
+            style={{ marginRight: 5 }}
+            onPress={() => {
+              showdrawer(true);
+            }}
+          />
           <View style={{ flex: 1 }}>
             <Text style={styles.title}>History</Text>
             <Text style={styles.subtitle}>All Symbols</Text>
@@ -60,7 +76,7 @@ export default function HistoryScreen() {
 
         {/* Summary Rows */}
         {activeTab == "ORDERS" ? (
-          <>
+          <ScrollView>
             <View style={styles.dateRow}>
               <Text style={styles.dateText}>05-02-2026</Text>
               <Feather name="eye" size={22} color="#fff" />
@@ -78,15 +94,15 @@ export default function HistoryScreen() {
               <HistoryItem time="2026.02.07 08:31:33" />
               <HistoryItem time="2026.02.07 08:31:11" />
             </View>
-          </>
+          </ScrollView>
         ) : (
-          <View style={styles.section}>
+          <ScrollView style={styles.section}>
             <InfoRow label="Profit:" value="0.00" highlight />
             <InfoRow label="Swap:" value="0.00" />
             <InfoRow label="Commission:" value="0.00" />
             <InfoRow label="Balance:" value="0.00" />
             <InfoRow label="Total Lots:" value="0.00" />
-          </View>
+          </ScrollView>
         )}
       </SafeAreaView>
     </LinearGradient>

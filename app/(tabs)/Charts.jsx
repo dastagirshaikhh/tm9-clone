@@ -1,11 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TradingView from "../../components/TradingView.jsx";
+import { DrawerContext } from "../_layout.jsx";
 
 export default function ChartScreen() {
+  const { showdrawer } = useContext(DrawerContext);
   return (
     <LinearGradient colors={["#0b1621", "#070d14"]} style={styles.container}>
       <SafeAreaView
@@ -14,7 +16,14 @@ export default function ChartScreen() {
       >
         {/* TOP BAR */}
         <View style={styles.topBar}>
-          <Ionicons name="menu" size={24} color="#fff" />
+          <Ionicons
+            name="menu"
+            size={24}
+            color="#fff"
+            onPress={() => {
+              showdrawer(true);
+            }}
+          />
           <TouchableOpacity style={styles.symbol}>
             <Text style={styles.symbolText}>BTCUSD</Text>
             <Ionicons name="chevron-down" size={18} color="#fff" />
@@ -31,7 +40,7 @@ export default function ChartScreen() {
   );
 }
 
-function PriceBox({ label, price, color }: any) {
+function PriceBox({ label, price, color }) {
   return (
     <View style={[styles.priceBox, { backgroundColor: color }]}>
       {label ? <Text style={styles.priceLabel}>{label}</Text> : null}
