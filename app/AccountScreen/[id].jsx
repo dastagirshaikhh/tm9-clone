@@ -1,12 +1,13 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router, Stack } from "expo-router";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   Modal,
   Pressable,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -16,6 +17,8 @@ import { DrawerContext } from "../../app/_layout";
 export default function AccountsScreen() {
   const [menuVisible, setMenuVisible] = useState(false);
   const { showdrawer } = useContext(DrawerContext);
+  const [search, setSearch]= useState("");
+  const [showSearch, setShowSearch]= useState(false);
   return (
     <>
       <Stack.Screen
@@ -27,7 +30,21 @@ export default function AccountsScreen() {
       >
         <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
           {/* Top Bar */}
-          <View style={styles.topBar}>
+          
+            {showSearch ? 
+            <View style={styles.searchRow}>
+               <TextInput
+                  placeholder="Enter Account Number"
+                  placeholderTextColor="#9ca3af"
+                  style={styles.searchInput}
+                  value={search}
+                  onChangeText={setSearch}
+               />
+              <Ionicons name="search" size={20} color="#9ca3af" onPress={()=>{
+                setShowSearch(false);
+              }}/>
+            </View>:
+            <View style={styles.topBar}>
             <Ionicons
               name="menu"
               size={24}
@@ -38,15 +55,18 @@ export default function AccountsScreen() {
             />
 
             <Text style={styles.title}>Accounts</Text>
-
             <View style={styles.topIcons}>
-              <Ionicons name="search" size={22} color="#fff" />
-              <Ionicons name="add" size={26} color="#fff" />
+              <Ionicons name="search" size={22} color="#fff" onPress={()=>{
+                setShowSearch(true);
+              }}/>
+              <Ionicons name="add" size={26} color="#fff" onPress={()=>{
+                router.push("/Broker")
+              }}/>
               <TouchableOpacity onPress={() => setMenuVisible(true)}>
                 <MaterialIcons name="more-vert" size={24} color="#fff" />
               </TouchableOpacity>
             </View>
-          </View>
+          </View>}
 
           {/* Account Card */}
           <View style={styles.card}>
@@ -248,6 +268,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     marginTop: 28,
+  },
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#111c2a", // dark card background
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    borderWidth: 1,
+    borderColor: "#1f2937",
+  },
+
+  searchInput: {
+    flex: 1,
+    color: "#ffffff",
+    fontSize: 16,
+    letterSpacing: 0.5,
   },
 
   balance: {

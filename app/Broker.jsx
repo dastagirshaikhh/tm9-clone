@@ -1,7 +1,7 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router, Stack } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -151,11 +151,21 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
 
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#111c2a", // dark card background
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    borderWidth: 1,
+    borderColor: "#1f2937",
+  },
+
   searchInput: {
     flex: 1,
     color: "#ffffff",
-    fontSize: 18,
-    paddingVertical: 4,
+    fontSize: 16,
+    letterSpacing: 0.5,
   },
 
   searchUnderline: {

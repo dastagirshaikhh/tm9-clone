@@ -1,14 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { ScrollView, StyleSheet, Switch, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DrawerContext } from "./_layout";
 
 export default function SettingsScreen() {
   const [orderSounds, setOrderSounds] = useState(true);
   const [oneClickTrading, setOneClickTrading] = useState(true);
   const [enableNews, setEnableNews] = useState(false);
   const [showTPSL, setShowTPSL] = useState(true);
+  const {showdrawer}= useContext(DrawerContext);
 
   return (
     <>
@@ -16,7 +18,9 @@ export default function SettingsScreen() {
       <SafeAreaView style={styles.safe}>
         {/* Header */}
         <View style={styles.header}>
-          <Ionicons name="menu" size={26} color="#fff" />
+          <Ionicons name="menu" size={26} color="#fff" onPress={()=>{
+            showdrawer(true);
+          }}/>
           <Text style={styles.headerTitle}>Settings</Text>
         </View>
         <ScrollView>

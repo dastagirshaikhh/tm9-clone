@@ -51,7 +51,9 @@ const QuoteItem = ({
 
           <Text style={styles.time}>04:54:36 ┤ {volume}</Text>
 
-          <TouchableOpacity style={styles.analyseBtn}>
+          <TouchableOpacity style={styles.analyseBtn} onPress={()=>{
+            router.push("/PairScreen")
+          }}> 
             <Text style={styles.analyseText}>Analyse</Text>
             <View style={styles.analyseArrowBox}>
               <Text style={styles.analyseArrow}>›</Text>

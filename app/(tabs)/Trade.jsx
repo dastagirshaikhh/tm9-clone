@@ -1,13 +1,15 @@
 import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router";
-import { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { router, useNavigation } from "expo-router";
+import React, { useContext, useState } from "react";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DrawerContext } from "../_layout";
 
 export default function TradeScreen() {
+  const navigation = useNavigation();
   const { showdrawer } = useContext(DrawerContext);
+  const [showBulkModal, setShowBulkModal] = useState(false);
   return (
     <LinearGradient
       colors={["#0b1621", "#0a121b", "#070d14"]}
@@ -74,7 +76,9 @@ export default function TradeScreen() {
 
             <View style={styles.positionsIcons}>
               <MaterialIcons name="close-fullscreen" size={18} color="#fff" />
-              <Ionicons name="ellipsis-horizontal" size={20} color="#fff" />
+              <Ionicons name="ellipsis-horizontal" size={20} color="#fff" onPress={()=>{
+                setShowBulkModal(true)
+              }}/>
             </View>
           </View>
 
@@ -101,6 +105,37 @@ export default function TradeScreen() {
             profit="276.10"
           />
         </View>
+        <Modal
+          visible={showBulkModal}
+          animationType="slide"
+          transparent
+          onRequestClose={() => setShowBulkModal(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              activeOpacity={1}
+              onPress={() => setShowBulkModal(false)}
+            />
+
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Bulk Operations</Text>
+
+              <TouchableOpacity style={styles.modalItem}>
+                <Text style={styles.modalText}>Close All Positions</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.modalItem}>
+                <Text style={styles.modalText}>Close Profitable Positions</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.modalItem}>
+                <Text style={styles.modalText}>Close Losing Positions</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
       </SafeAreaView>
     </LinearGradient>
   );
@@ -272,5 +307,38 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "#1f2937",
     marginHorizontal: 16,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.55)",
+    justifyContent: "flex-end",
+  },
+
+  modalContainer: {
+    backgroundColor: "#0b1a2b",
+    paddingTop: 18,
+    paddingBottom: 30,
+    paddingHorizontal: 20,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+  },
+
+  modalTitle: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 18,
+  },
+
+  modalItem: {
+    paddingVertical: 18,
+    borderTopWidth: 1,
+    borderColor: "#1f2d3d",
+  },
+
+  modalText: {
+    color: "#ffffff",
+    fontSize: 16,
   },
 });
